@@ -2,82 +2,140 @@
 
 ## Overview
 
-This project implements a remote-controlled traffic light system using two LoRa-enabled microcontrollers, the XIAO ESP32S3 and the Lilygo T-Beam. The system allows you to control a set of traffic lights (represented by LEDs) from a remote location using the LoRa communication protocol. Additionally, the project integrates with Adafruit IO, allowing you to monitor and control the traffic lights from a web-based dashboard.
+This project implements a remote-controlled traffic light system using two LoRa-enabled microcontrollers: the **XIAO ESP32S3** (transmitter) and the **Lilygo T-Beam** (receiver). Leveraging the LoRa communication protocol and Adafruit IO integration, you can monitor and control LEDs that simulate a traffic light setup from anywhere with an internet connection.
+
+---
+
+## 🖼️ Project Images
+
+Below are some snapshots of the setup:
+
+![Image 1](./images/image-1.jpg)  
+*Transmitter (XIAO ESP32S3) wired up and ready to send.*
+
+![Image 2](./images/image-2.jpg)  
+*Receiver (Lilygo T‑Beam) with LEDs and breadboard layout.*
+
+![Image 3](./images/image-3.jpg)  
+*Close-up showing the traffic light LEDs in action.*
+
+![Image 4](./images/image-4.jpg)  
+*Adafruit IO dashboard displaying live toggle controls.*
+
+![Image 5](./images/image-5.jpg)  
+*Final prototype setup with both microcontrollers powered.*
+
+---
 
 ## Features
 
-  * **Remote Control:** Control traffic lights from a distance using LoRa communication.
-  * **Adafruit IO Integration:** Monitor and control the traffic lights from an Adafruit IO dashboard.
-  * **Real-time Status Updates:** Get real-time status updates of the traffic lights on the Adafruit IO dashboard.
-  * **Easy to build:** The project uses readily available components and can be assembled with basic electronics knowledge.
+- **Remote Control:** Operate traffic lights wirelessly via LoRa.
+- **Adafruit IO Integration:** Use a web dashboard for monitoring and controlling lights.
+- **Real-time Updates:** Instant feedback on LED status through the dashboard.
+- **Simple Build:** Uses common components and straightforward wiring.
+
+---
 
 ## Hardware Requirements
 
-  * **XIAO ESP32S3:** This microcontroller sends the control signals.
-  * **Lilygo T-Beam:** This microcontroller receives the control signals and controls the LEDs.
-  * **LEDs:** Red, yellow, and green LEDs to represent the traffic lights.
-  * **Resistors:** To limit the current to the LEDs.
-  * **Breadboard and Jumper Wires:** For prototyping the circuit.
+- **XIAO ESP32S3** – sends control signals  
+- **Lilygo T-Beam** – receives signals and drives LEDs  
+- **LEDs** – red, yellow, green  
+- **Resistors** – current-limiting (220–330 Ω recommended)  
+- **Breadboard & Jumper Wires** – for assembly  
+
+---
 
 ## Software Requirements
 
-  * **Arduino IDE:** To program the microcontrollers.
-  * **Adafruit IO Account:** To monitor and control the traffic lights from a web dashboard.
+- **Arduino IDE**
+- **Adafruit IO account**
 
-## Libraries
+---
 
-  * **Adafruit IO Arduino:** To connect to the Adafruit IO service.
-  * **Arduino LoRa:** To enable LoRa communication.
-  * **Adafruit MQTT Library:** For MQTT communication with Adafruit IO.
-  * **SPI:** For communication with the LoRa module.
+## Required Libraries
+
+- **Adafruit IO Arduino**  
+- **Arduino LoRa**  
+- **Adafruit MQTT Library**  
+- **SPI**  
+
+---
 
 ## Adafruit IO Setup
 
-1.  Create an account on [Adafruit IO](https://io.adafruit.com/).
-2.  Create a new dashboard.
-3.  Create three new feeds:
-      * `traffic-light-red`
-      * `traffic-light-yellow`
-      * `traffic-light-green`
-4.  Add three toggle blocks to your dashboard and connect them to the feeds you just created.
-5.  Get your Adafruit IO username and AIO key.
+1. Sign up at [Adafruit IO](https://io.adafruit.com/).
+2. Create a new dashboard.
+3. Add three feeds:  
+   - `traffic-light-red`  
+   - `traffic-light-yellow`  
+   - `traffic-light-green`  
+4. Add toggle blocks for each feed.
+5. Copy your Adafruit IO username and AIO key for later.
 
-## Installation
+---
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/caringalml/remote-traffic-lights-with-lora-.git
-    ```
-2.  **Install the required libraries:**
-      * Open the Arduino IDE.
-      * Go to **Sketch \> Include Library \> Manage Libraries...**
-      * Search for and install the following libraries:
-          * Adafruit IO Arduino
-          * Arduino LoRa
-          * Adafruit MQTT Library
-3.  **Configure the `secret.h` file:**
-      * Open the `send_to_lora_and_to_adafruit_server/secret.h` file.
-      * Replace `"<your-username>"` with your Adafruit IO username.
-      * Replace `"<your-aio-key>"` with your Adafruit IO AIO key.
-4.  **Configure the `config.h` file:**
-      * Open the `send_to_lora_and_to_adafruit_server/config.h` file.
-      * Configure your WiFi credentials.
-5.  **Upload the code:**
-      * Upload the `send_to_lora_and_to_adafruit_server.ino` sketch to your XIAO ESP32S3.
-      * Upload the `recieve_from_lora_and_control_led.ino` sketch to your Lilygo T-Beam.
+## Installation Steps
 
-## Usage
+1. **Clone the repo:**
+   ```bash
+   git clone https://github.com/caringalml/remote-traffic-lights-with-lora-.git
+````
 
-1.  Power on both the XIAO ESP32S3 and the Lilygo T-Beam.
-2.  The XIAO ESP32S3 will connect to your WiFi network and the Adafruit IO service.
-3.  The Lilygo T-Beam will wait for LoRa signals.
-4.  Open your Adafruit IO dashboard.
-5.  Use the toggle blocks to control the traffic lights.
+2. **Install Libraries:**
+
+   * In Arduino IDE: **Sketch → Include Library → Manage Libraries…**
+   * Search for and install:
+
+     * *Adafruit IO Arduino*
+     * *Arduino LoRa*
+     * *Adafruit MQTT Library*
+3. **Configure WiFi & Adafruit IO:**
+
+   * Open `send_to_lora_and_to_adafruit_server/secret.h`
+
+     ```cpp
+     #define IO_USERNAME "<your-username>"
+     #define IO_KEY      "<your-aio-key>"
+     ```
+   * Open `config.h` and set your SSID and password:
+
+     ```cpp
+     #define WIFI_SSID     "your_SSID"
+     #define WIFI_PASSWORD "your_password"
+     ```
+4. **Upload Sketches:**
+
+   * `send_to_lora_and_to_adafruit_server.ino` → **XIAO ESP32S3**
+   * `receive_from_lora_and_control_led.ino` → **Lilygo T-Beam**
+
+---
+
+## Usage Guide
+
+1. Power on both microcontrollers.
+2. The XIAO ESP32S3 will connect to WiFi and Adafruit IO.
+3. The Lilygo T‑Beam listens for LoRa commands.
+4. Open your Adafruit IO dashboard.
+5. Use the toggles to activate the red, yellow, and green LEDs.
+
+---
+
+
+## 🎥 Project Video
+
+Check out a quick demo of the system in action:
+
+[![Remote Traffic Lights with LoRa Demo](https://img.youtube.com/vi/X4vUCieE72s/0.jpg)](https://youtube.com/shorts/X4vUCieE72s)
+
+
 
 ## Contributing
 
-Contributions are welcome\! Please open an issue or submit a pull request if you have any improvements or suggestions.
+We welcome contributions! Feel free to [open an issue](https://github.com/caringalml/remote-traffic-lights-with-lora-/issues) or submit a PR with enhancements or fixes.
+
+---
 
 ## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for more details.
+Distributed under the MIT License—see the [LICENSE](./LICENSE) file for details.
