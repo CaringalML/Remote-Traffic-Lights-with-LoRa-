@@ -19,10 +19,10 @@ New Zealand’s Temporary Traffic Management standards for low-speed zones (typi
 Below are some snapshots of the setup:
 
 ![Image 6](./images/image-6.png)  
-*Transmitter (XIAO ESP32S3) wired and ready to send.*
+*Transmitter (XIAO ESP32S3) https://www.aliexpress.com/item/1005008717048383.html?spm=a2g0o.order_list.order_list_main.46.56e91802WGQpXn*
 
 ![Image 7](./images/image-7.png)  
-*Receiver (Lilygo T‑Beam) with LEDs and breadboard.*
+*Receiver (Lilygo T‑Beam) https://www.aliexpress.com/item/1005007012178080.html?spm=a2g0o.order_list.order_list_main.41.56e91802WGQpXn*
 
 ![Image 1](./images/image-1.jpg)  
 *Traffic Light Body*
